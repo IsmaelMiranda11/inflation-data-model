@@ -1,0 +1,28 @@
+services:
+
+  airflow:
+    image: apache/airflow
+    container_name: airflow-local
+    entrypoint: ./scripts/entrypoint.sh
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./etl:/opt/airflow/etl
+      - ./scripts:/opt/airflow/scripts
+    env_file:
+      - ./docker/.env
+    ports:
+      - "8980:8080"
+
+  data-postgres:
+    image: postgres
+    container_name: postgres-database
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_db:/var/lib/postgresql/data
+  
+volumes:
+  postgres_db:

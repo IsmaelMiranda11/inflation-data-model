@@ -1,0 +1,82 @@
+[
+    {
+        "id": "1501",
+        "nome": "Belém",
+        "nivel": {
+            "id": "N7",
+            "nome": "Região metropolitana"
+        }
+    },
+    {
+        "id": "2301",
+        "nome": "Fortaleza",
+        "nivel": {
+            "id": "N7",
+            "nome": "Região metropolitana"
+        }
+    },
+    {
+        "id": "2601",
+        "nome": "Recife",
+        "nivel": {
+            "id": "N7",
+            "nome": "Região metropolitana"
+        }
+    },
+    {
+        "id": "2901",
+        "nome": "Salvador",
+        "nivel": {
+            "id": "N7",
+            "nome": "Região metropolitana"
+        }
+    },
+    {
+        "id": "3101",
+        "nome": "Belo Horizonte",
+        "nivel": {
+            "id": "N7",
+            "nome": "Região metropolitana"
+        }
+    },
+    {
+        "id": "3201",
+        "nome": "Grande Vitória",
+        "nivel": {
+            "id": "N7",
+            "nome": "Região metropolitana"
+        }
+    },
+    {
+        "id": "3301",
+        "nome": "Rio de Janeiro",
+        "nivel": {
+            "id": "N7",
+            "nome": "Região metropolitana"
+        }
+    },
+    {
+        "id": "3501",
+        "nome": "São Paulo",
+        "nivel": {
+            "id": "N7",
+            "nome": "Região metropolitana"
+        }
+    },
+    {
+        "id": "4101",
+        "nome": "Curitiba",
+        "nivel": {
+            "id": "N7",
+            "nome": "Região metropolitana"
+        }
+    },
+    {
+        "id": "4301",
+        "nome": "Porto Alegre",
+        "nivel": {
+            "id": "N7",
+            "nome": "Região metropolitana"
+        }
+    }
+]

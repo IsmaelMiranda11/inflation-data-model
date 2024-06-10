@@ -21,3 +21,5 @@ airflow connections add \
     --conn-password postgres123
 
 airflow standalone
+
+pip install -r requirements.txt

@@ -51,7 +51,12 @@ class categories(Base):
     __tablename__ = 'categories'
 
     category_id = Column(type_=postgresql.INTEGER, primary_key=True,
-                         comment='Category id')
+                         comment='Category id') 
+    category_code = Column(type_=postgresql.INTEGER,
+                           comment='Category code')
+    category_id_name = Column(type_=postgresql.VARCHAR(100),
+                             comment='Category id name')
+    
     category_name = Column(type_=postgresql.VARCHAR(2000),
                            comment='Category name')
     level = Column(type_=postgresql.INTEGER, comment='Category level')

@@ -112,8 +112,8 @@ Table: `categories`
 Columns | Description
 --- | ---
 category_id | Category id
-id_name | Category name with id
-name | Category name
+category_id_name | Category name with id
+category_name | Category name
 level | Category level
 created_at | The date of the category insertion
 updated_at | The date of the category update

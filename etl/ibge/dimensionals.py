@@ -2,39 +2,16 @@
 
 '''
 
-import configparser
-import os
-from utils import get_url_response
+from utils import get_url_response, urls
 
 import pandas as pd
 
 # Airflow
 from airflow.providers.postgres.hooks.postgres import PostgresHook #type: ignore
 
-def urls(information:str) -> str:
-    '''Read the urls.ini file and return the url for the requested information
-
-    Args:
-        information (str): Information to be searched in the urls.ini file
-
-    '''
-    # Get the current directory
-    current_directory = os.path.dirname(__file__)
-
-    # Get the path to the urls.ini file
-    path = os.path.join(current_directory, 'urls.ini')
-
-    # Read the urls.ini file
-    config = configparser.ConfigParser()
-    config.read(path)
-
-    # Return the url for the requested information
-    return config['urls'][information]
-
 # 1. Cities Read cities from the API and store them in the `cities` table.
 def dim_cities():
     '''Retrieve the cities from the API and store them in the `cities` table
-
 
     '''
 

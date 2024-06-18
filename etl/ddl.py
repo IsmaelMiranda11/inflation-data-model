@@ -116,7 +116,7 @@ class raw_data_ibge(Base):
 
     # Define the primary key
     __table_args__ = (
-        PrimaryKeyConstraint('month_id', 'city_id'),
+        PrimaryKeyConstraint('month_id', 'city_id', 'aggregate_id'),
     )
 
     def columns(self):

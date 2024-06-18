@@ -5,6 +5,8 @@
 import requests
 import requests.adapters
 import ssl
+import os
+import configparser
 
 def get_url_response(url) -> dict:
     '''Function to fix a problem in get URL
@@ -23,3 +25,23 @@ def get_url_response(url) -> dict:
     with requests.session() as s: 
         s.mount("https://", TLSAdapter())
         return s.get(url).json()
+    
+def urls(information:str) -> str:
+    '''Read the urls.ini file and return the url for the requested information
+
+    Args:
+        information (str): Information to be searched in the urls.ini file
+
+    '''
+    # Get the current directory
+    current_directory = os.path.dirname(__file__)
+
+    # Get the path to the urls.ini file
+    path = os.path.join(current_directory, 'urls.ini')
+
+    # Read the urls.ini file
+    config = configparser.ConfigParser()
+    config.read(path)
+
+    # Return the url for the requested information
+    return config['urls'][information]

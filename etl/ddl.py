@@ -8,10 +8,11 @@ The target database is PostgreSQL, running in a local Docker container.
 '''
 from sqlalchemy import Column
 from sqlalchemy import PrimaryKeyConstraint
+from sqlalchemy import ForeignKeyConstraint
 from sqlalchemy import create_engine, inspect
 from sqlalchemy import text
 
-from sqlalchemy.orm import declarative_base
+from sqlalchemy.orm import declarative_base, relationship
 
 from sqlalchemy.dialects import postgresql
 
@@ -137,10 +138,12 @@ class inflation(Base):
 
     month_id = Column(type_=postgresql.INTEGER,
                       comment='The month of the data')
+    month_date = Column(type_=postgresql.DATE,
+                        comment='The first day of the month')
     city_id = Column(type_=postgresql.INTEGER,
-                     comment='The city id')
+                     comment='The city id',)
     category_id = Column(type_=postgresql.INTEGER,
-                         comment='The category id')
+                         comment='The category id',)
     ipca_month_weight = Column(type_=postgresql.NUMERIC,
                                comment='The category weight in the month')
     ipca_month_variation = Column(type_=postgresql.NUMERIC,
@@ -153,8 +156,10 @@ class inflation(Base):
     # Define the primary key
     __table_args__ = (
         PrimaryKeyConstraint('month_id', 'city_id', 'category_id'),
+        ForeignKeyConstraint(['month_date'], ['calendar.date'], ),
+        ForeignKeyConstraint(['city_id'], ['cities.city_id']),
+        ForeignKeyConstraint(['category_id'], ['categories.category_id'])
     )
-
 
 def create_tables(Base, engine):
     '''Create all tables in Base metadata

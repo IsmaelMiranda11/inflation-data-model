@@ -145,13 +145,13 @@ class inflation(Base):
     category_id = Column(type_=postgresql.INTEGER,
                          comment='The category id',)
     ipca_month_weight = Column(type_=postgresql.NUMERIC,
-                               comment='The category weight in the month')
+                               comment='The category weight in the month in %')
     ipca_month_variation = Column(type_=postgresql.NUMERIC,
-                                  comment='Prices variation by month')
+                                  comment='Prices variation by month in %')
     ipca_accumulated_year_variation = Column(type_=postgresql.NUMERIC,
-                        comment='Accumalate variation within the year')
+                        comment='Accumalate variation within the year in %')
     ipca_accumulated_12_months_variation = Column(type_=postgresql.NUMERIC,
-                        comment='Accumulate variation in 12 running months')
+                        comment='Accumulate variation in 12 running months in %')
 
     # Define the primary key
     __table_args__ = (
@@ -182,8 +182,8 @@ if __name__ == '__main__':
     # Define the engine
     engine = create_engine(
         'postgresql+psycopg2://'
-        'postgres:postgres123@'
-        'localhost:5432'
+        'postgres:postgres123'
+        '@localhost:5432'
     )
 
     # Create the tables

@@ -31,7 +31,7 @@ For each city id from the `cities` table, the data is retrieved from API and the
 
 With the raw data in hand, the fact table can be processed.
 
-The workflow will be consist in:
-    1. Loop for each varible inside JSON
-    2. Get the series value of json
-    3. Put the value in the corresponding variable column
+The workflow will be consist in:  
+    1. Loop for each varible inside JSON  
+    2. Get the series value of json  
+    3. Put the value in the corresponding variable column  

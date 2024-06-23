@@ -92,5 +92,5 @@ def raw_table(period:str):
 
     return None
 
-if __name__ == '__main__':
-    raw_table('202101')
+# if __name__ == '__main__':
+#     raw_table('202101')

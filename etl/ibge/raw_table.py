@@ -2,7 +2,7 @@
 
 '''
 
-from utils import get_url_response, urls
+from .utils import get_url_response, urls
 
 import pandas as pd
 

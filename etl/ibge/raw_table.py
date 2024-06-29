@@ -5,6 +5,7 @@
 from .utils import get_url_response, urls
 
 import pandas as pd
+import logging
 
 import json
 
@@ -40,14 +41,17 @@ def raw_table(period:str):
     base_url = urls('base_url')
 
     # For each city, get the data from the API
+    logging.info('Getting data from API')
     dfs = []
     for city in list_cities():
         # Difine the url
         url = base_url.format(period=period, city=city)
-        
+        print(url)
+        logging.info(f'Getting data from {url} for city id {city}')
         # Get the data from the API
         data = get_url_response(url)
         df = pd.DataFrame.from_dict(data)
+        print(df)
         
         # Add the city_id, period and url to the dataframe
         df['month_id'] = period
@@ -56,10 +60,11 @@ def raw_table(period:str):
 
         # Append the data to the list of dataframes
         dfs.append(df)
-        
 
     # Concatenate the dataframes
     df = pd.concat(dfs)
+
+    logging.info(f'Columns: {df.columns} and lines: {df.shape[0]}')
 
     # Make the column results a json
     
@@ -74,11 +79,14 @@ def raw_table(period:str):
     # Connect to database with Airflow hook
     postgres_hook = PostgresHook() #Use the default connection
 
+    logging.info('Inserting new data')
+
+    logging.info(f'Deleting existing data for period {period}')
     # Delete existing data for period
     postgres_hook.run(
         f'''
         DELETE FROM raw_data_ibge
-        WHERE month_id = '{period}'
+        WHERE month_id = {period}
         '''
     )
 
@@ -89,6 +97,8 @@ def raw_table(period:str):
         target_fields=['aggregate_id', 'aggregate_name', 'json_data', 
                        'month_id', 'city_id', 'api_url']
     )
+
+    logging.info(f'Data inserted for period {period}. Lines: {df.shape[0]}')
 
     return None
 

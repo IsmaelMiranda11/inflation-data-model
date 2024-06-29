@@ -13,6 +13,8 @@ services:
       - ./docker/.env
     ports:
       - "8980:8080"
+    depends_on:
+      - data-postgres
 
   data-postgres:
     image: postgres

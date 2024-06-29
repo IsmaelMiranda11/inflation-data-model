@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# Airflow setup
 airflow db migrate
 
 airflow users create \
@@ -22,4 +23,15 @@ airflow connections add \
 
 airflow standalone
 
+# Process the dag
+airflow dags reserialize
+
+# Unpause the dag dimensional_model_ibge
+airflow dags unpause dimensional_model_ibge
+
+# Install requirements
 pip install -r requirements.txt
+
+# Create tables in database
+python /opt/airflow/etl/create_tables.py
+

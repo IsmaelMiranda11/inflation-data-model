@@ -7,6 +7,7 @@ from airflow.models.dag import DAG
 from airflow.models.dagrun import DagRun
 from airflow.decorators import task, task_group
 from airflow.providers.postgres.hooks.postgres import PostgresHook
+from airflow.operators.empty import EmptyOperator
 
 # General imports
 import pandas as pd
@@ -14,8 +15,8 @@ import json
 import os
 import sys
 from pathlib import Path
-from datetime import timedelta
 from datetime import datetime
+from datetime import timedelta
 import pendulum
 
 # Folder project for imports
@@ -30,17 +31,26 @@ from etl.ibge.inflation import inflation
 # This project was created in Lisbon
 lisbon = pendulum.timezone('Europe/Lisbon') #type:ignore
 
+# Tasks defaults arguments
+default_args = {
+    'owner': 'airflow',
+    'execution_timeout': timedelta(minutes=60),
+    'wait_for_downstream': True
+}
 
 # DAG
 with DAG(
     dag_id='dimensional_model_ibge', # DAG name
     doc_md=Path(__file__).stem, # Documentation
-    start_date=datetime(2020, 1, 5, tzinfo=lisbon), # Start date
+    start_date=datetime(2019, 12, 5, tzinfo=lisbon), # Start date
     schedule='0 10 5 * *', # 5th day of the month at 10:00
-    catchup=True, # Run backfill at creation
+    # catchup=True, # Run backfill at creation
     max_active_runs=1, # Only one run at a time
     render_template_as_native_obj=True, # Render template as native object
+
 ) as dag:
+
+    start = EmptyOperator(task_id='start') #type: ignore
 
     # Dimensional task group
     @task_group(group_id='dimensionals')
@@ -89,5 +99,7 @@ with DAG(
         (
             inflation_table()
         ) #type: ignore
-    
-    dimensionals() >> raw() >> fact() #type: ignore
+
+    end = EmptyOperator(task_id='end') #type: ignore
+
+    start >> dimensionals() >> raw() >> fact() >> end #type: ignore

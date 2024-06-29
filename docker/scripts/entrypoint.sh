@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+# Install requirements
+pip install -r requirements.txt
+
+# Create tables in database
+python /opt/airflow/etl/create_tables.py
+
 # Airflow setup
 airflow db migrate
 
@@ -21,17 +27,11 @@ airflow connections add \
     --conn-login postgres \
     --conn-password postgres123
 
-airflow standalone
-
 # Process the dag
 airflow dags reserialize
 
 # Unpause the dag dimensional_model_ibge
 airflow dags unpause dimensional_model_ibge
 
-# Install requirements
-pip install -r requirements.txt
-
-# Create tables in database
-python /opt/airflow/etl/create_tables.py
-
+# Start the airflow service
+airflow standalone

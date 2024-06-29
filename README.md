@@ -1,16 +1,10 @@
-# Inflação do Brasil - Dados IBGE
+# Brazil Inflation Data Model
 
-WIP
+This project aims to create a data model to store the inflation data from the Brazilian Institute of Geography and Statistics (IBGE) API.
 
-Esse repositório contém arquivos de desenvolvimento de um pipeline de dados da API do IBGE.  
+## Technologies
 
-A ideia é fazer ingestão dos dados, seu tratamento e depois disponibilizar tabelas em um banco para consulta e relatórios.
-
-## Stack
-
-- Airflow para orquestração
-- Pandas para tratamento de dados
-- SQL Alchemy para manipulação do banco de dados
-- Postgres como banco de dados
-- Docker como virtualizador dos processos
-
+- ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white) for **infrastructure and containerization**  
+- ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white) for **data storage**
+- ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white) for **data processing**
+- ![Apache Airflow](https://img.shields.io/badge/Apache%20Airflow-017CEE?style=for-the-badge&logo=apache-airflow&logoColor=white) for **data pipeline orchestration**

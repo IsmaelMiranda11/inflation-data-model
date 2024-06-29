@@ -35,19 +35,21 @@ lisbon = pendulum.timezone('Europe/Lisbon') #type:ignore
 default_args = {
     'owner': 'airflow',
     'execution_timeout': timedelta(minutes=60),
-    'wait_for_downstream': True
+    'wait_for_downstream': True,
+    'retries': 10,
+    'retry_delay': timedelta(seconds=60),
 }
 
 # DAG
 with DAG(
     dag_id='dimensional_model_ibge', # DAG name
-    doc_md=Path(__file__).stem, # Documentation
+    doc_md=f'{Path(__file__).stem}.md', # Documentation
     start_date=datetime(2019, 12, 5, tzinfo=lisbon), # Start date
     schedule='0 10 5 * *', # 5th day of the month at 10:00
-    # catchup=True, # Run backfill at creation
+    catchup=True, # Run backfill at creation
     max_active_runs=1, # Only one run at a time
     render_template_as_native_obj=True, # Render template as native object
-
+    default_args=default_args # Default arguments
 ) as dag:
 
     start = EmptyOperator(task_id='start') #type: ignore

@@ -1,11 +1,7 @@
-# Inflação IBGE - Modelo Dimensional
+# Dimensional Model IBGE DAG
 
-Pipeline de engenharia de dados para consumir dados da api do IBGE para criar um modelo dimensional para análise dos dados de inflação no Brasil.
+## Description
 
-## Dimensionais
+This DAG is responsible for orchestrating the pipeline that extracts data from the IBGE API, processes it and stores it in a postgres database.
 
-WIP
-
-## Fatos
-
-WIP
+More in the [repository](https://github.com/IsmaelMiranda11/inflacao-ibge)

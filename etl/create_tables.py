@@ -183,7 +183,7 @@ if __name__ == '__main__':
     engine = create_engine(
         'postgresql+psycopg2://'
         'postgres:postgres123'
-        '@localhost:5432'
+        '@host.docker.internal:5432'
     )
 
     # Create the tables

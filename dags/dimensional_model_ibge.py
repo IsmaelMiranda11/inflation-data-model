@@ -47,7 +47,7 @@ with DAG(
     start_date=datetime(2019, 12, 5, tzinfo=lisbon), # Start date
     schedule='0 10 5 * *', # 5th day of the month at 10:00
     catchup=True, # Run backfill at creation
-    max_active_runs=1, # Only one run at a time
+    max_active_runs=12, # Only one run at a time
     render_template_as_native_obj=True, # Render template as native object
     default_args=default_args # Default arguments
 ) as dag:

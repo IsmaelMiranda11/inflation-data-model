@@ -8,9 +8,9 @@ services:
       - ./dags:/opt/airflow/dags
       - ./etl:/opt/airflow/etl
       - ./docker/scripts:/opt/airflow/scripts
-      - ./requirements.txt:/opt/requirements.txt
+      - ./requirements.txt:/opt/airflow/requirements.txt
     env_file:
-      - ./docker/.env
+      - ./docker/env
     ports:
       - "8980:8080"
     depends_on:

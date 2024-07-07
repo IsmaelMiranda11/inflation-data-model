@@ -58,6 +58,7 @@ def inflation(period:str):
                     )
             )
         )
+        # Pivot the table
         .pivot_table(columns='aggregate_id', index=['month_id','month_date',
                                                     'category_id', 'city_id'],
                      values='value')

@@ -10,7 +10,7 @@ import logging
 # Airflow
 from airflow.providers.postgres.hooks.postgres import PostgresHook #type: ignore
 
-# 1. Cities Read cities from the API and store them in the `cities` table.
+# Cities
 def dim_cities():
     '''Retrieve the cities from the API and store them in the `cities` table
 
@@ -51,7 +51,7 @@ def dim_cities():
 
     logging.info('Updating cities that have name changed')
     # Update the cities that have name changed
-    df_conf = df_city.merge(df_city_database, left_on='id', right_on='city_id', 
+    df_conf = df_city.merge(df_city_database, left_on='id', right_on='city_id',
                             how='inner')
     # Get the cities that have name changed
     df_update_city = df_conf[df_conf['nome'] != df_conf['city_name']]
@@ -69,8 +69,7 @@ def dim_cities():
 
     return None
 
-# 2. Categories Read categories from the API and store them in the `categories`
-# table.
+# Categories
 def dim_categories():
     '''Retrieve the categories from the API and store them in the `categories` table
 
@@ -112,7 +111,7 @@ def dim_categories():
     df_category_database = postgres_hook.get_pandas_df('SELECT * FROM categories')
     # Filter the new cities from API
     df_new_category = df_category[~df_category['id'].isin(df_category_database['category_id'])]
-    
+
     # Insert rows in the `categories` table
     postgres_hook.insert_rows(
         table='categories',
@@ -124,9 +123,9 @@ def dim_categories():
     # Update the categories that have name changed
     logging.info('Updating categories that have name changed')
 
-    df_conf = df_category.merge(df_category_database, left_on='id', 
+    df_conf = df_category.merge(df_category_database, left_on='id',
                                 right_on='category_id', how='inner')
-    
+
     # Get the categories that have name changed
     df_update_category = df_conf[df_conf['nome'] != df_conf['category_id_name']]
 
@@ -143,14 +142,11 @@ def dim_categories():
             '''
         )
 
-    logging.info(f'Categories updated: {df_update_category.shape[0]}')    
+    logging.info(f'Categories updated: {df_update_category.shape[0]}')
 
     return None
 
-# 3. Calendar Create a calendar table to store the date information for the
-# project. This could be used in a BI project, for example.This is dependent
-# on the year of processing. If the new year is processed, the calendar table
-# will be updated.
+# Calendar
 def dim_calendar(period:str):
     '''Create a calendar table to store the date information for the project
 

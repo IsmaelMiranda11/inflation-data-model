@@ -1,6 +1,8 @@
 */dev
 etl/ibge/raw_table.csv
 backlog.md
+release.md
+release.pptx
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

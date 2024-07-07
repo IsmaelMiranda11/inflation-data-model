@@ -140,6 +140,3 @@ Database: postgres
 User: postgres
 Password: postgres123
 ```
-
-<!-- Em ingles: Pipline de extração e disponibilização de dados de inflação do Brasil.  -->
-Data pipeline to extract and provide Brazil inflation data.

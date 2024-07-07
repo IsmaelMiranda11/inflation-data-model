@@ -56,13 +56,12 @@ with DAG(
 
     # Dimensional task group
     @task_group(group_id='dimensionals')
-    def dimensionals(dag_run: DagRun=None): #type: ignore
+    def dimensionals(): #type: ignore
 
         @task(task_id='calendar')
-        # print the execution date
         def calendar(**kwargs):
             period = kwargs['dag_run'].data_interval_end.strftime('%Y%m')
-            dim_calendar(period=period) # Create the calendar dimension
+            dim_calendar(period=period)
 
         @task(task_id='categories')
         def categories():

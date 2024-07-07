@@ -46,13 +46,11 @@ def raw_table(period:str):
     for city in list_cities():
         # Difine the url
         url = base_url.format(period=period, city=city)
-        print(url)
         logging.info(f'Getting data from {url} for city id {city}')
         # Get the data from the API
         data = get_url_response(url)
         df = pd.DataFrame.from_dict(data)
-        print(df)
-        
+
         # Add the city_id, period and url to the dataframe
         df['month_id'] = period
         df['city_id'] = city
@@ -67,12 +65,12 @@ def raw_table(period:str):
     logging.info(f'Columns: {df.columns} and lines: {df.shape[0]}')
 
     # Make the column results a json
-    
+
     df = (
         df
         .drop(columns=['unidade'])
         .assign(resultados = lambda x: x['resultados'].apply(json.dumps))
-        .rename(columns={'id': 'aggregate_id', 'variavel': 'aggregate_name', 
+        .rename(columns={'id': 'aggregate_id', 'variavel': 'aggregate_name',
                          'resultados': 'json_data'})
     )
 
@@ -82,6 +80,7 @@ def raw_table(period:str):
     logging.info('Inserting new data')
 
     logging.info(f'Deleting existing data for period {period}')
+
     # Delete existing data for period
     postgres_hook.run(
         f'''
@@ -94,7 +93,7 @@ def raw_table(period:str):
     postgres_hook.insert_rows(
         table='raw_data_ibge',
         rows=df.itertuples(index=False),
-        target_fields=['aggregate_id', 'aggregate_name', 'json_data', 
+        target_fields=['aggregate_id', 'aggregate_name', 'json_data',
                        'month_id', 'city_id', 'api_url']
     )
 

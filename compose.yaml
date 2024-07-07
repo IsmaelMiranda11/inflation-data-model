@@ -8,7 +8,7 @@ services:
       - ./dags:/opt/airflow/dags
       - ./etl:/opt/airflow/etl
       - ./docker/scripts:/opt/airflow/scripts
-      - ./requirements.txt:/opt/airflow/requirements.txt
+      - ./docker/requirements.txt:/opt/airflow/requirements.txt
     env_file:
       - ./docker/env
     ports:

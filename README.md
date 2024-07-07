@@ -111,7 +111,7 @@ DBeaver is a free database client that can be used to access the PostgreSQL data
 1. Clone the repository:
 
 ```bash
-git clone 
+git clone https://github.com/IsmaelMiranda11/inflation-data-model.git
 ```
 
 2. Run `docker compose` in the root directory of the project:
@@ -140,3 +140,6 @@ Database: postgres
 User: postgres
 Password: postgres123
 ```
+
+<!-- Em ingles: Pipline de extração e disponibilização de dados de inflação do Brasil.  -->
+Data pipeline to extract and provide Brazil inflation data.

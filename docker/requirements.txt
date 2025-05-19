@@ -1,5 +1,5 @@
 asttokens==2.4.1
-certifi==2024.2.2
+certifi>=2024.7.4
 charset-normalizer==3.3.2
 colorama==0.4.6
 comm==0.2.2
@@ -7,7 +7,7 @@ debugpy==1.8.1
 decorator==5.1.1
 executing==2.0.1
 greenlet==3.0.3
-idna==3.6
+idna>=3.7
 ipykernel==6.29.4
 ipython==8.24.0
 jedi==0.19.1
@@ -29,7 +29,7 @@ python-dateutil==2.9.0.post0
 pytz==2024.1
 pywin32==306
 pyzmq==26.0.3
-requests==2.31.0
+requests>=2.32.0
 six==1.16.0
 SQLAlchemy==1.4.52
 stack-data==0.6.3

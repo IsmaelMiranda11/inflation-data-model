@@ -36,5 +36,5 @@ stack-data==0.6.3
 tornado==6.5
 traitlets==5.14.3
 tzdata==2024.1
-urllib3==2.2.1
+urllib3>=2.2.2
 wcwidth==0.2.13
